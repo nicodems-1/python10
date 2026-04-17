@@ -1,4 +1,4 @@
-from typing import Callable
+from collections.abc import Callable
 import time
 from functools import wraps
 import random
