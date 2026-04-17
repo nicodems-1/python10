@@ -39,7 +39,7 @@ def memory_vault() -> dict[str, Callable]:
 
     def recall(*args, **kwargs) -> Any:
         if memory.get(args[0]) is None:
-            return f"Recall '{args[0]}' : Memory not found"
+            return "Memory not found"
         return f"Recall '{args[0]}' : {memory.get(args[0])}"
 
     dictio = {"store": store, "recall": recall}

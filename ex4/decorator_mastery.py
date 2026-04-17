@@ -61,7 +61,7 @@ def retry_spell(max_attempts: int) -> Callable:
         def retry_spell_wrap(*args, **kwargs):
             for i in range(max_attempts):
                 try:
-                    return func()
+                    return func(*args, **kwargs)
                 except Exception:
                     print(
                         f"Spell failed, retrying..."
