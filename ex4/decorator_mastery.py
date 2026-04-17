@@ -86,19 +86,25 @@ class MageGuild:
 def failed_spell():
     if random.randint(0, 5) != 5:
         raise ValueError
-    return "YES"
+    return "Waaaaaaagh spelled !"
 
 
 @power_validator(5)
 def power_spell(power: int):
     if power:
-        return "Waaaaaaaaagh spelled"
+        return "power is high enough, waiting for your command"
 
 
 if __name__ == "__main__":
-    print(fibonacci(20))
-    print(power_spell(6))
+    print("Testing spell timer...")
+    print(f"result: {fibonacci(20)}")
+    print("\nTesting retrying spell...")
     print(failed_spell())
+    print("\nTesting power validator spell...")
+    print(power_spell(6))
+    print("\nTesting MageGuild...")
     the_mage = MageGuild()
     print(the_mage.validate_mage_name("Michel"))
+    print(the_mage.validate_mage_name("Michel1"))
+    print(the_mage.cast_spell("firewater", 54))
     print(the_mage.cast_spell("firewater", 4))
