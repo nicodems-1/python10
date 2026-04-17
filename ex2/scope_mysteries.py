@@ -32,18 +32,18 @@ def enchantment_factory(enchantment_type: str) -> Callable:
 
 
 def memory_vault() -> dict[str, Callable]:
-    memory = {}
+    memory: dict[str, Any] = {}
 
-    def store(*args, **kwargs) -> str:
-        memory.update({args[0]: args[1]})
-        return f"Store '{args[0]}' - {args[1]}"
+    def store(key: str, value: Any) -> str:
+        memory.update({key: value})
+        return f"Store '{key}' - {value}"
 
-    def recall(*args, **kwargs) -> Any:
-        if memory.get(args[0]) is None:
+    def recall(key: str) -> Any:
+        if memory.get(key) is None:
             return "Memory not found"
-        return f"Recall '{args[0]}' : {memory.get(args[0])}"
+        return f"Recall '{key}' : {memory.get(key)}"
 
-    dictio = {"store": store, "recall": recall}
+    dictio: dict[str, Callable] = {"store": store, "recall": recall}
     return dictio
 
 
