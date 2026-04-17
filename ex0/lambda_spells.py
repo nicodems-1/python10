@@ -4,7 +4,7 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
-    powerful_mages = filter(lambda mages: mages["power"] >= min_power, mages)
+    powerful_mages = filter(lambda mage: mage["power"] >= min_power, mages)
     return list(powerful_mages)
 
 
@@ -17,8 +17,8 @@ def mage_stats(mages: list[dict]) -> dict:
     min_power = min(mages, key=lambda x: x["power"])
     avg_power = round(sum(map(lambda x: x["power"], mages)) / len(mages), 2)
     return {
-        "max_power": max_power,
-        "min_power": min_power,
+        "max_power": max_power["power"],
+        "min_power": min_power["power"],
         "avg_power": avg_power,
     }
 
