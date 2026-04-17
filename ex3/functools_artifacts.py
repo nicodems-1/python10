@@ -7,13 +7,13 @@ from collections.abc import Callable
 def spell_reducer(spells: list[int], operation: str) -> int:
     try:
         if spells:
-            dict = {
+            dict_op = {
                 "add": lambda x, y: add(x, y),
                 "multiply": lambda x, y: mul(x, y),
                 "max": lambda x, y: max(x, y),
                 "min": lambda x, y: min(x, y),
             }
-            return reduce(dict[operation], spells)
+            return reduce(dict_op[operation], spells)
         return 0
     except KeyError as e:
         print(
