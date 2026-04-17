@@ -20,7 +20,7 @@ def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     def caster(*args, **kwargs):
-        if state(spell):
+        if condition(spell):
             return spell(*args, **kwargs)
         return "spell fizzled"
 
