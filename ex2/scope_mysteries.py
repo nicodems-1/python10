@@ -16,17 +16,17 @@ def mage_counter() -> Callable:
 def spell_accumulator(initial_power: int) -> Callable:
     total_power = initial_power
 
-    def memory(*args, **kwargs) -> int:
+    def memory(power_to_add) -> int:
         nonlocal total_power
-        total_power += args[0]
+        total_power += power_to_add
         return total_power
 
     return memory
 
 
 def enchantment_factory(enchantment_type: str) -> Callable:
-    def apply_enchant(*args, **kwargs) -> str:
-        return f"{enchantment_type} {args[0]}"
+    def apply_enchant(item: str) -> str:
+        return f"{enchantment_type} {item}"
 
     return apply_enchant
 

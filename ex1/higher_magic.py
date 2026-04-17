@@ -12,7 +12,7 @@ def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
     def power_magic(target: str, power: int, *args, **kwargs):
-        res1 = base_spell(target, power * multiplier, **kwargs)
+        res1 = base_spell(target, power * multiplier, *args, **kwargs)
         return res1
 
     return power_magic
