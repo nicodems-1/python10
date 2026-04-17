@@ -57,8 +57,10 @@ def damn_broski(target: str, power: int) -> str:
     return f"Damn the fendi suits you well {target}, you have {power} moula "
 
 
-def state(func: Callable, power: int) -> bool:
-    return func is fire and power is None
+def state(name: str, power: int) -> bool:
+    if len(name) > 3 and power > 5:
+        return True
+    return False
 
 
 def main():
@@ -73,7 +75,7 @@ def main():
 
     print("\nTesting conditional caster...")
     conditional = conditional_caster(state, fire)
-    print(conditional("dragon", 14))
+    print(conditional("dragon", 12))
 
     print("\nTesting spell sequence")
     list_functions = [fire, ice_moula, damn_broski]
