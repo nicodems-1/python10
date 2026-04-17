@@ -71,7 +71,7 @@ def main():
 
     print("\nTesting power amplifier...")
     magic = power_amplifier(power, 3)
-    print(f"Original: 3, Amplified: {magic(5)}")
+    print(f"Original: 3, Amplified: {magic(10)}")
 
     print("\nTesting conditional caster...")
     conditional = conditional_caster(state, fire)
