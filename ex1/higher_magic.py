@@ -20,7 +20,7 @@ def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     def caster(*args, **kwargs):
-        if condition(spell):
+        if condition(*args, **kwargs):
             return spell(*args, **kwargs)
         return "spell fizzled"
 
@@ -57,8 +57,8 @@ def damn_broski(target: str, power: int) -> str:
     return f"Damn the fendi suits you well {target}, you have {power} moula "
 
 
-def state(func: Callable) -> bool:
-    return func is fire
+def state(func: Callable, power: int) -> bool:
+    return func is fire and power is None
 
 
 def main():
