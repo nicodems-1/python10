@@ -16,7 +16,7 @@ def mage_counter() -> Callable:
 def spell_accumulator(initial_power: int) -> Callable:
     total_power = initial_power
 
-    def memory(power_to_add) -> int:
+    def memory(power_to_add: int) -> int:
         nonlocal total_power
         total_power += power_to_add
         return total_power
@@ -47,7 +47,7 @@ def memory_vault() -> dict[str, Callable]:
     return dictio
 
 
-def main():
+def main() -> None:
     print("Testing mage counter...")
     count1 = mage_counter()
     count2 = mage_counter()

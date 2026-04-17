@@ -2,36 +2,36 @@ from collections.abc import Callable
 
 
 def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
-    def call_spell(*args, **kwargs) -> tuple:
-        res1 = spell1(*args, **kwargs)
-        res2 = spell2(*args, **kwargs)
+    def call_spell(target: str, power: int) -> tuple:
+        res1 = spell1(target, power)
+        res2 = spell2(target, power)
         return (res1, res2)
 
     return call_spell
 
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
-    def power_magic(target: str, power: int, *args, **kwargs):
-        res1 = base_spell(target, power * multiplier, *args, **kwargs)
+    def power_magic(target: str, power: int) -> int:
+        res1 = base_spell(target, power * multiplier)
         return res1
 
     return power_magic
 
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
-    def caster(*args, **kwargs):
-        if condition(*args, **kwargs):
-            return spell(*args, **kwargs)
+    def caster(target: str, power: int) -> str | Callable:
+        if condition(target, power):
+            return spell(target, power)
         return "spell fizzled"
 
     return caster
 
 
 def spell_sequence(spells: list[Callable]) -> Callable:
-    def cast_all(*args, **kwargs):
+    def cast_all(name: str, power: int) -> list:
         res_list = []
         for spell in spells:
-            res_list.append(spell(*args, **kwargs))
+            res_list.append(spell(name, power))
         return res_list
 
     return cast_all
@@ -41,7 +41,7 @@ def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
 
-def power_spell(target: str, power: int):
+def power_spell(target: str, power: int) -> int:
     return power
 
 
@@ -63,7 +63,7 @@ def state(name: str, power: int) -> bool:
     return False
 
 
-def main():
+def main() -> None:
 
     print("Testing spell combiner...")
     combine = spell_combiner(heal, fire)

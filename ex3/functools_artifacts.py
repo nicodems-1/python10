@@ -46,25 +46,25 @@ def memoized_fibonacci(n: int) -> int:
 
 def spell_dispatcher() -> Callable[[Any], str]:
     @singledispatch
-    def base_spell(argument: Any):
+    def base_spell(argument: Any) -> str:
         return "Unknown spell type"
 
     @base_spell.register
-    def _(argument: int):
+    def _(argument: int) -> str:
         return f"Damage spell: {argument} damage"
 
     @base_spell.register
-    def _(argument: str):
+    def _(argument: str) -> str:
         return f"Enchantments: {argument} "
 
     @base_spell.register
-    def _(argument: list):
+    def _(argument: list) -> str:
         return f"Multi-cast: {len(argument)} spells"
 
     return base_spell
 
 
-def main():
+def main() -> None:
     spells = [1, 54, 45, 152]
     print("Testing spell reducer...")
     print(f"Sum: {spell_reducer(spells, 'add')}")

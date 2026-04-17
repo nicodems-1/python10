@@ -2,13 +2,14 @@ from collections.abc import Callable
 import time
 from functools import wraps
 import random
+from typing import Any
 
 
-def spell_timer(func: Callable):
+def spell_timer(func: Callable) -> Callable:
     depth = 0
 
     @wraps(func)
-    def my_timer_wrapper(*args, **kwargs):
+    def my_timer_wrapper(*args: Any, **kwargs: Any) -> Callable:
         nonlocal depth
         if depth == 0:
             print(f"Casting {func.__name__}")
@@ -36,9 +37,9 @@ def fibonacci(n: int) -> int:
 
 
 def power_validator(min_power: int) -> Callable:
-    def wrapper(func: Callable):
+    def wrapper(func: Callable) -> Callable:
         @wraps(func)
-        def power_validator_wrap(*args, **kwargs):
+        def power_validator_wrap(*args: Any, **kwargs: Any) -> Callable | str:
             if len(args) == 1:
                 power = args[0]
             else:
@@ -54,9 +55,9 @@ def power_validator(min_power: int) -> Callable:
 
 
 def retry_spell(max_attempts: int) -> Callable:
-    def wrapper(func: Callable):
+    def wrapper(func: Callable) -> Callable:
         @wraps(func)
-        def retry_spell_wrap(*args, **kwargs):
+        def retry_spell_wrap(*args: Any, **kwargs: Any) -> str | Callable:
             for i in range(max_attempts):
                 try:
                     return func(*args, **kwargs)
@@ -78,21 +79,20 @@ class MageGuild:
         return len(name) >= 3 and all(c.isalpha() or c.isspace() for c in name)
 
     @power_validator(10)
-    def cast_spell(self, spell_name, power):
+    def cast_spell(self, spell_name: str, power: int) -> str:
         return f"Successfully cast {spell_name} with {power} power"
 
 
 @retry_spell(5)
-def failed_spell():
+def failed_spell() -> str:
     if random.randint(0, 5) != 5:
         raise ValueError
     return "Waaaaaaagh spelled !"
 
 
 @power_validator(5)
-def power_spell(power: int):
-    if power:
-        return "power is high enough, waiting for your command"
+def power_spell(power: int) -> str:
+    return "power is high enough, waiting for your command"
 
 
 if __name__ == "__main__":
